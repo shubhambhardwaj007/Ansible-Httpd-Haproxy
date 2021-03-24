@@ -13,8 +13,13 @@
           - name: "Deploying Web Pages"
             copy:
                     src: "webpages/"
-                    destination: "/var/www/html/"
+                    dest: "/var/www/html/"
                     force: True
+          - name: "Starting Httpd webserver service"
+            service:
+                    name: "httpd"
+                    state: started
+                    enabled: true
 - name: "Configuring Haproxy Software on Managed Nodes"
   hosts: loadbalancer
   tasks:
@@ -22,4 +27,7 @@
             package:
                     name: "haproxy"
                     state: present
+          - template:
+                  src: "files/haproxy.cfg.j2"
+                  dest: "/etc/haproxy/haproxy.cfg"
 
