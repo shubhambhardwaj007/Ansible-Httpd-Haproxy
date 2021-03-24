@@ -1,0 +1,20 @@
+---
+- name: "Configuring Httpd server on Managed Nodes"
+  hosts: webserver
+  tasks:
+          - name: "Installing Httpd Software"
+            package:
+                    name: "httpd"
+                    state: present
+          - name: "Installing PHP Runtime"
+            package:
+                    name: "php"
+                    state: present
+- name: "Configuring Haproxy Software on Managed Nodes"
+  hosts: loadbalancer
+  tasks:
+          - name: "Installing Haproxy Software"
+            package:
+                    name: "haproxy"
+                    state: present
+
