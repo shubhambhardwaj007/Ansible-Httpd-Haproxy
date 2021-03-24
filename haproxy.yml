@@ -10,6 +10,11 @@
             package:
                     name: "php"
                     state: present
+          - name: "Deploying Web Pages"
+            copy:
+                    src: "webpages/"
+                    destination: "/var/www/html/"
+                    force: True
 - name: "Configuring Haproxy Software on Managed Nodes"
   hosts: loadbalancer
   tasks:
