@@ -1,6 +1,7 @@
 ---
 - name: "Configuring Httpd server on Managed Nodes"
   hosts: webserver
+  become: true
   tasks:
           - name: "Installing Httpd Software"
             package:
@@ -15,16 +16,23 @@
                     src: "webpages/"
                     dest: "/var/www/html/"
                     force: True
-            notify: restart_httpd
+            notify: 
+            - restart_httpd
           - name: "Starting Httpd webserver service"
             service:
                     name: "httpd"
                     state: started
                     enabled: True
+  handlers:
+          - name: restart_httpd
+            service:
+                    name: "httpd"
+                    state: restarted
 - name: "Configuring Haproxy Software on Managed Nodes"
   vars_files:
           - variable.yml
   hosts: loadbalancer
+  become: True
   tasks:
           - name: "Installing Haproxy Software"
             package:
@@ -41,11 +49,7 @@
                     state: started
                     enabled: True
   handlers:
-          - name: restart_httpd
-            service:
-                    name: "httpd"
-                    state: restarted
-          - name: restart
+          - name: restart_haproxy
             service:
                     name: "haproxy"
                     state: restarted
