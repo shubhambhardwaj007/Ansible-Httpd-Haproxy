@@ -15,19 +15,37 @@
                     src: "webpages/"
                     dest: "/var/www/html/"
                     force: True
+            notify: restart_httpd
           - name: "Starting Httpd webserver service"
             service:
                     name: "httpd"
                     state: started
-                    enabled: true
+                    enabled: True
 - name: "Configuring Haproxy Software on Managed Nodes"
+  vars_files:
+          - variable.yml
   hosts: loadbalancer
   tasks:
           - name: "Installing Haproxy Software"
             package:
                     name: "haproxy"
                     state: present
-          - template:
+          - name: "Deploying Dynamically updated haproxy.cfg"
+            template:
                   src: "files/haproxy.cfg.j2"
                   dest: "/etc/haproxy/haproxy.cfg"
-
+            notify: restart_haproxy
+          - name: "Starting Haproxy Service"
+            service:
+                    name: "haproxy"
+                    state: started
+                    enabled: True
+  handlers:
+          - name: restart_httpd
+            service:
+                    name: "httpd"
+                    state: restarted
+          - name: restart
+            service:
+                    name: "haproxy"
+                    state: restarted

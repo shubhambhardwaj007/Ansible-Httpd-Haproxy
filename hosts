@@ -12,7 +12,7 @@
 
 ## green.example.com
 ## blue.example.com
-## 192.168.100.1
+#  192.168.100.1
 ## 192.168.100.10
 
 # Ex 2: A collection of hosts belonging to the 'webservers' group
@@ -42,7 +42,7 @@
 
 ## db-[99:101]-node.example.com
 [webserver]
-node1.lw.example.com
-node2.lw.example.com
+192.168.43.205
+192.168.43.15
 [loadbalancer]
-node3.lw.example.com
+192.168.43.172

@@ -85,5 +85,5 @@ backend static
 backend app
     balance     roundrobin
 {% for webserver_ip in groups['webserver'] %}
-    server  app{{ loop.index }} {{ webserver_ip }}:{{ webserver_ip }} check
+    server  app{{ loop.index }} {{ webserver_ip }}:{{ webserver_port }} check
 {% endfor %}
