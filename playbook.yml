@@ -1,6 +1,0 @@
-- hosts: webserver
-  roles:
-          - Ansible-Httpd-Role
-- hosts: loadbalancer
-  roles:
-          - Ansible-Haproxy-Role
