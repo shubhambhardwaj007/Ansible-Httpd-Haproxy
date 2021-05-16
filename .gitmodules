@@ -1,0 +1,6 @@
+[submodule "roles/Ansible-Haproxy-Role"]
+	path = roles/Ansible-Haproxy-Role
+	url = git@github.com:shubhambhardwaj007/Ansible-Haproxy-Role.git
+[submodule "roles/Ansible-Httpd-Role"]
+	path = roles/Ansible-Httpd-Role
+	url = git@github.com:shubhambhardwaj007/Ansible-Httpd-Role.git
